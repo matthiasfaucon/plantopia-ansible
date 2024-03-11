@@ -19,7 +19,7 @@ node index.js
 
 1. Configurer le back-end :
 
-Dans le dossier `back-end`, renommer le fichier `.env.example` en `.env` et rajouter le token qui vous a été fournis à la création de votre compte sur [text](https://trefle.io/)
+Dans le dossier `back-end`, renommer le fichier `.env.example` en `.env` et rajouter le token qui vous a été fournis à la création de votre compte sur https://trefle.io/
 
 ## Structure du Projet
 
