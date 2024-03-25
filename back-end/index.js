@@ -124,10 +124,12 @@ app.delete('/plants/:id', async (req, res) => {
 })
 
 app.post('/contact', (req, res) => {
-    const resend = new Resend('re_EuyUxcqf_88vZnDybsbX8PJr24dXv3HDz');
+    const token_resend = process.env.TOKEN_RESEND
+    const email_resend = process.env.EMAIL_RESEND
+    const resend = new Resend(token_resend);
     resend.emails.send({
       from: 'onboarding@resend.dev',
-      to: 'matthias.faucon@eemi.com',
+      to: email_resend,
       subject: `[${req.body.name}] - ${req.body.subject}`,
       html: `<b>Mail de :</b> ${req.body.email} 
       <br><br> <b>Message :</b> <br>
