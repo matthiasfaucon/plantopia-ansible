@@ -31,9 +31,9 @@
                             <input type="text" id="family" v-model="plant.family" />
                         </div>
                         <div class="form-group">
-                            <label for="genus">Genre</label>
+                            <label for="genus">Gènes</label>
                             <select name="genus" id="genus" v-model="plant.genusTab">
-                                <option value="">Choisir un genre</option>
+                                <option value="">Choisir un gène</option>
                                 <option v-for="genus in genusTab" :key="genus" :value="genus">
                                     {{ genus.name }}
                                 </option>
@@ -59,6 +59,9 @@
                     </div>
                     <input type="submit" value="Ajouter la plante"></input>
                 </form>
+                <div class="loader" v-else>
+                    <p>Chargement des informations en cours...</p>
+                </div>
             </div>
         </div>
 
@@ -67,9 +70,11 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
+import Swal from 'sweetalert2';
 
 const router = useRouter();
+const route = useRoute();
 
 const plant = ref({
     common_name: '',
@@ -92,8 +97,15 @@ async function addPlant() {
         body: JSON.stringify(plant.value),
     });
     response = await response.json();
-    // Use `router` instead of `this.$router`
-    router.push('/plants');
+
+    Swal.fire({
+        title: "Plante modifiée !",
+        text: "Nous vous remercions pour votre contribution.",
+        icon: "success",
+        willClose: () => {
+            router.push('/plants/' + response.id);
+        }
+    });
 
 }
 
@@ -247,5 +259,15 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #0A3A1A;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #10552D;
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    font-size: 1.2rem;
 }
 </style>

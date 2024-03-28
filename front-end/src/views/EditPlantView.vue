@@ -31,9 +31,9 @@
                             <input type="text" id="family" v-model="plant.family" />
                         </div>
                         <div class="form-group">
-                            <label for="genus">Genre</label>
+                            <label for="genus">Gènes</label>
                             <select name="genus" id="genus" v-model="plant.genusTab">
-                                <option value="">Choisir un genre</option>
+                                <option value="">Choisir un gène</option>
                                 <option v-for="genus in genusTab" :key="genus" :value="genus">
                                     {{ genus.name }}
                                 </option>
@@ -59,6 +59,9 @@
                     </div>
                     <input type="submit" value="Ajouter la plante"></input>
                 </form>
+                <div class="loader" v-else>
+                    <p>Chargement des informations en cours...</p>
+                </div>
             </div>
         </div>
 
@@ -104,7 +107,6 @@ async function addPlant() {
         }
     });
 
-
 }
 
 const genusTab = ref([]);
@@ -121,6 +123,7 @@ onMounted(async () => {
     };
     plant.value = responsePlant;
     isLoading.value = false;
+    console.log(plant.value);
 
 });
 
@@ -264,5 +267,15 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #0A3A1A;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #10552D;
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    font-size: 1.2rem;
 }
 </style>

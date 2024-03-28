@@ -2,6 +2,12 @@
   <section class="plant">
     <img :src="plant.image_url" alt="plant" />
     <div class="plant-informations">
+      <RouterLink to="/plants" class="back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+        </svg>
+      </RouterLink>
       <h1>{{ plant.common_name }}</h1>
       <div class="specifications">
 
@@ -106,6 +112,16 @@ section {
   height: calc(90dvh - 2px);
 }
 
+.back-button {
+  position: absolute;
+  top: 2rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: 0.5rem;
+  background: #10552D;
+  border-radius: 100%;
+}
+
 .plant {
   display: flex;
   flex-direction: row-reverse;
@@ -120,12 +136,13 @@ section {
 }
 
 .plant-informations {
+  position: relative;
   display: flex;
   flex-direction: column;
   background-color: #002917;
   width: 100%;
   height: 100%;
-  padding: 5rem 2rem;
+  padding: 6rem 2rem;
 }
 
 .plant-informations p {
