@@ -13,13 +13,16 @@ npm run dev
 3. Installer les dépendances du back-end :
 cd back-end
 npm install
-node index.js
+npm run dev
 
 ## Configuration
 
 1. Configurer le back-end :
 
-Dans le dossier `back-end`, renommer le fichier `.env.example` en `.env` et rajouter le token qui vous a été fournis à la création de votre compte sur https://trefle.io/
+### Si vous souhaitez utiliser l'API (Attention au timeout)
+Dans le dossier `back-end`, renommer le fichier `.env.example` en `.env` et rajouter le token pour utiliser Resend.
+
+Pour obtenir le token, veuillez consulter la documentation de Resend [ici](https://resend.com/docs/introduction).
 
 ## Structure du Projet
 
