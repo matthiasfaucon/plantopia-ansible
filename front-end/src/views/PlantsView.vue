@@ -18,12 +18,10 @@
         </select>
       </div>
 
-
       <div class="plants-list">
         <PlantCard v-for="plant in plants" :key="plant.id" :plant="plant" />
       </div>
     </div>
-
 
     <!-- Pagination -->
     <div v-if="!isLoading" class="pagination">

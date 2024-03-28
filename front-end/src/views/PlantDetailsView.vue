@@ -35,10 +35,17 @@
           <p>{{ plant.author }}</p>
         </div>
       </div>
-      <div>
+      <div class="actions">
         <button @click="deletePlant()" class="delete-plant-button">
           Supprimer la plante
         </button>
+        <router-link :to="`/plants/edit/${plant.id}`">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+          </svg>
+        </router-link>
       </div>
       <!-- <p v-for="synonym in plant.synonyms">
         {{ synonym }}
@@ -63,7 +70,6 @@ onMounted(async () => {
   const response = await fetch(`http://localhost:8000/plants/${id}`);
   plant.value = await response.json();
 });
-
 
 async function deletePlant() {
   Swal.fire({
@@ -125,6 +131,38 @@ section {
   justify-content: space-between;
 }
 
+.actions {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  margin-top: 2rem;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.actions>* {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.actions a,
+.actions button {
+  min-height: 3rem;
+  min-width: 3rem;
+  width: fit-content;
+}
+
+.actions a {
+  background-color: #10552D;
+  border-radius: 5px;
+}
+
+.actions a svg {
+  height: 60%;
+}
+
 .plant img {
   height: 100%;
   width: 40%;
@@ -174,7 +212,7 @@ section {
   padding: 1rem 2rem;
   border-radius: 5px;
   margin-bottom: 1rem;
-  width: calc(50% - 1rem);
+  width: calc(50% - 0.5rem);
 }
 
 .box .title {
@@ -191,7 +229,10 @@ section {
   border-radius: 5px;
   color: #DADDD8;
   font-weight: 700;
-  margin-top: 2rem;
   cursor: pointer;
+}
+
+.delete-plant-button:hover {
+  background-color: #ff1a26;
 }
 </style>
