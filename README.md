@@ -19,7 +19,6 @@ npm run dev
 
 1. Configurer le back-end :
 
-### Si vous souhaitez utiliser l'API (Attention au timeout)
 Dans le dossier `back-end`, renommer le fichier `.env.example` en `.env` et rajouter le token pour utiliser Resend.
 
 Pour obtenir le token, veuillez consulter la documentation de Resend [ici](https://resend.com/docs/introduction).
