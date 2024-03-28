@@ -8,9 +8,8 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
         </svg>
       </RouterLink>
-      <h1>{{ plant.common_name }}</h1>
+      <h1 class="plant-name-title">{{ plant.common_name }}</h1>
       <div class="specifications">
-
         <div class="box">
           <p class="title">Nom scientifique</p>
           <p>{{ plant.scientific_name }}</p>
@@ -63,7 +62,6 @@ onMounted(async () => {
   const id = route.params.id
   const response = await fetch(`http://localhost:8000/plants/${id}`);
   plant.value = await response.json();
-  console.log(plant.value);
 });
 
 
@@ -81,11 +79,9 @@ async function deletePlant() {
       let deletePlant = await fetch(`http://localhost:8000/plants/${plant.value.id}`, {
         method: 'DELETE',
       });
-      console.log(deletePlant);
 
       deletePlant = await deletePlant.json();
       if (deletePlant.message === "Plant deleted") {
-        console.log("Plant deleted");
         Swal.fire({
           icon: "success",
           title: "Plante supprimée !",
@@ -143,6 +139,10 @@ section {
   width: 100%;
   height: 100%;
   padding: 6rem 2rem;
+}
+
+.plant-name-title {
+  text-transform: capitalize;
 }
 
 .plant-informations p {

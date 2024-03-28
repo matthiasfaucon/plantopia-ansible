@@ -57,7 +57,6 @@ onMounted(async () => {
   let genus = await fetch('http://localhost:8000/genus');
   response = await response.json();
   genus = await genus.json();
-  console.log(genus);
   plants.value = await response.data;
   totalPages.value = response.totalPages;
   genusTab.value = genus;

@@ -17,7 +17,8 @@
                     <div class="plant-names">
                         <div class="form-group">
                             <label for="scientific_name">Nom scientifique</label>
-                            <input type="text" id="scientific_name" v-model="plant.scientific_name" />
+                            <input type="text" id="scientific_name" v-model="plant.scientific_name"
+                                placeholder="test" />
                         </div>
                         <div class="form-group">
                             <label for="common_name">Nom commun</label>
@@ -57,7 +58,7 @@
                         <label for="image">Image</label>
                         <input type="file" id="image" @change="handleImageChange" />
                     </div>
-                    <input type="submit" value="Ajouter la plante"></input>
+                    <input type="submit" value="Éditer la plante"></input>
                 </form>
                 <div class="loader" v-else>
                     <p>Chargement des informations en cours...</p>
@@ -123,8 +124,6 @@ onMounted(async () => {
     };
     plant.value = responsePlant;
     isLoading.value = false;
-    console.log(plant.value);
-
 });
 
 function handleImageChange(event) {

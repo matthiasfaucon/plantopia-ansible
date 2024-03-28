@@ -17,18 +17,18 @@
                     <div class="plant-names">
                         <div class="form-group">
                             <label for="scientific_name">Nom scientifique</label>
-                            <input type="text" id="scientific_name" v-model="plant.scientific_name" />
+                            <input type="text" id="scientific_name" v-model="plant.scientific_name"
+                                placeholder="Plantago lanceolata" />
                         </div>
                         <div class="form-group">
                             <label for="common_name">Nom commun</label>
-                            <input type="text" id="common_name" v-model="plant.common_name" />
+                            <input type="text" id="common_name" v-model="plant.common_name" placeholder="Plantago" />
                         </div>
                     </div>
                     <div class="family-genus">
-
                         <div class="form-group">
                             <label for="family">Famille</label>
-                            <input type="text" id="family" v-model="plant.family" />
+                            <input type="text" id="family" v-model="plant.family" placeholder="Plantaginaceae" />
                         </div>
                         <div class="form-group">
                             <label for="genus">Gènes</label>
@@ -47,11 +47,12 @@
 
                     <div class="form-group">
                         <label for="bibliography">Bibliographie</label>
-                        <input type="text" id="bibliography" v-model="plant.bibliography" />
+                        <input type="text" id="bibliography" v-model="plant.bibliography"
+                            placeholder="Sp. Pl.: 113 (1753)" />
                     </div>
                     <div class="form-group">
                         <label for="author">Autheur</label>
-                        <input type="text" id="author" v-model="plant.author" />
+                        <input type="text" id="author" v-model="plant.author" placeholder="L." />
                     </div>
                     <div class="form-group">
                         <label for="image">Image</label>
@@ -99,7 +100,7 @@ async function addPlant() {
     response = await response.json();
 
     Swal.fire({
-        title: "Plante modifiée !",
+        title: "Plante Ajoutée !",
         text: "Nous vous remercions pour votre contribution.",
         icon: "success",
         willClose: () => {

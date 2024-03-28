@@ -19,7 +19,6 @@ app.get('/genus', async (req, res) => {
   try {
     let data = await fs.readFile('genus.json');
     data = JSON.parse(data);
-    console.log(data);
     let genus = [];
 
     //! Bug avec l'API (Timeout)
@@ -82,9 +81,7 @@ app.get('/plants', async (req, res) => {
 
 // Get a plant
 app.get('/plants/:id', async (req, res) => {
-  // récupérer données de la plante dans le fichier data.json
   try {
-
     let data = await fs.readFile('data.json')
     data = JSON.parse(data).data
     
@@ -100,8 +97,6 @@ app.get('/plants/:id', async (req, res) => {
 // Create a plant
 app.post('/plants', async (req, res) => {
   try {
-
-    // ajouter la plante dans le fichier data.json
     let data = await fs.readFile('data.json')
     data = JSON.parse(data).data
     const id = data.length + 1
@@ -122,31 +117,49 @@ app.post('/plants', async (req, res) => {
 
 // Update a plant
 app.put('/plants/:id', async (req, res) => {
-  // modifier la plante dans le fichier data.json
-  const id = parseInt(req.params.id)
-  let data = await fs.readFile('data.json')
-  data = JSON.parse(data).data
-  const plant = data.filter(plant => plant.id === id)[0]
-  const index = data.indexOf(plant)
-  data[index] = {...plant, ...req.body}
-  await fs.writeFile('data.json', JSON.stringify({data: data}))
-  return res.send({message: `Plant updated`, code: 200})
+  try {
+    const id = parseInt(req.params.id)
+    let data = await fs.readFile('data.json')
+    data = JSON.parse(data).data
+    const plant = data.filter(plant => plant.id === id)[0]
+    // On récupère l'id de la plante
+    const index = data.indexOf(plant)
+    req.body.genus_id = parseInt(req.body.genusTab.id)
+    req.body.genus = req.body.genusTab.name
+    
+    // unset value
+    delete req.body.genusTab
+    
+
+    data[index] = {...plant, ...req.body}
+    
+    await fs.writeFile('data.json', JSON.stringify({data: data}))
+    return res.send({message: `Plant updated`, code: 200})
+  } catch (error) {
+    console.error(error)
+    return res.status(500).send('Internal Server Error')
+  }
 })
 
 // Delete a plant
 app.delete('/plants/:id', async (req, res) => {
-  // supprimer la plante dans le fichier data.json
-  const id = parseInt(req.params.id);
-  let data = await fs.readFile('data.json');
-  data = JSON.parse(data).data;
-  // supprimer la plante
-  data = data.filter(plant => plant.id !== id);
-  await fs.writeFile('data.json', JSON.stringify({data: data}));
-  return res.send({message: `Plant deleted`, code: 200});
+  try {
+    const id = parseInt(req.params.id);
+    let data = await fs.readFile('data.json');
+    data = JSON.parse(data).data;
+    // supprimer la plante
+    data = data.filter(plant => plant.id !== id);
+    await fs.writeFile('data.json', JSON.stringify({data: data}));
+    return res.send({message: `Plant deleted`, code: 200});
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send('Internal Server Error');
+  }
 })
 
 // Send e-mail
 app.post('/contact', (req, res) => {
+  try {
     const token_resend = process.env.TOKEN_RESEND
     const email_resend = process.env.EMAIL_RESEND
     const resend = new Resend(token_resend);
@@ -159,6 +172,10 @@ app.post('/contact', (req, res) => {
       ${req.body.message}`
     });
     return res.send('ok')
+  } catch (error) {
+    console.error(error)
+    return res.status(500).send('Internal Server Error')
+  }
 })
 
 app.listen(port, () => {
