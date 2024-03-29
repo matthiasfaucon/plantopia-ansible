@@ -127,12 +127,11 @@ onMounted(async () => {
 });
 
 function handleImageChange(event) {
-    const file = event.target.files[0];
+    // Interface JS pour lire des fichiers (c'est asynchrone)
     const reader = new FileReader();
     reader.onload = (e) => {
         plant.value.image_url = e.target.result;
     };
-    reader.readAsDataURL(file);
 }
 </script>
 
