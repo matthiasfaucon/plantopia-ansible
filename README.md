@@ -12,14 +12,14 @@ Plantopia est la référence en ligne pour découvrir, apprendre et partager vot
 ## Installation et Utilisation
 
 1. **Cloner le dépôt :**
-    ```bash
-    git clone https://github.com/matthiasfaucon/plantopia.git
-    cd app
-    npm run install:all
-    cd front-end
-    npm run dev
-    cd ../back-end
-    npm run dev
+```bash
+git clone https://github.com/matthiasfaucon/plantopia.git
+cd app
+npm run install:all
+cd front-end
+npm run dev
+cd ../back-end
+npm run dev
 
 Pour tester la mise en production avec Ansible: `/docs/doc_playbook.md`
 
