@@ -2,16 +2,13 @@
 
 Plantopia est la référence en ligne pour découvrir, apprendre et partager votre passion pour les plantes.
 
-## Configuration
-
-1. **Configurer le back-end :**
+## Configuration du back-end :
    - Dans le dossier `back-end`, renommer le fichier `.env.example` en `.env`.
    - Ajouter le token et votre adresse mail pour utiliser Resend.
    - Pour obtenir le token et l'adresse mail associés, veuillez consulter la documentation de Resend [ici](https://resend.com/docs/introduction).
 
 ## Installation et Utilisation
 
-1. **Cloner le dépôt :**
 ```bash
 git clone https://github.com/matthiasfaucon/plantopia.git
 cd app
@@ -20,6 +17,7 @@ cd front-end
 npm run dev
 cd ../back-end
 npm run dev
+```
 
 Pour tester la mise en production avec Ansible: `/docs/doc_playbook.md`
 
