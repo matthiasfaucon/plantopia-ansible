@@ -45,7 +45,7 @@ docker compose exec node_manager bash
 ansible-playbook -i inventory.ini infra-playbook.yml
 ```
 
-## En cas d'erreur avec entrypoint.sh
+### En cas d'erreur avec entrypoint.sh
 Il faut faire la commande suivante:
 ```bash
 dos2unix docker/entrypoint.sh
