@@ -1,0 +1,55 @@
+FROM ubuntu:latest
+
+ARG USERNAME
+ARG PASSWORD
+ARG MYSQL_ROOT_PASSWORD
+
+# Install the necessary packages
+RUN apt-get update -y && apt-get install -y \
+    openssh-server sudo python3 nodejs npm
+
+# Create the necessary directories for sshd
+RUN mkdir /var/run/sshd
+
+# Disable password authentication
+RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+# Activate key authentication
+RUN sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+
+# Generate host keys
+RUN ssh-keygen -A
+
+# Create a new user
+RUN useradd -ms /bin/bash $USERNAME
+
+# Set the password for the new user
+RUN echo "$USERNAME:$PASSWORD" | chpasswd
+
+# Allow the new user to run sudo commands
+RUN usermod -aG sudo $USERNAME
+
+# Allow the new user to run sudo commands without a password
+RUN echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+# Set the default shell for the new user
+RUN chsh -s /bin/bash $USERNAME
+
+# Copy the public key into the authorized_keys of the new user
+RUN mkdir -p /home/$USERNAME/.ssh && \
+    chmod 700 /home/$USERNAME/.ssh && \
+    touch /home/$USERNAME/.ssh/authorized_keys && \
+    chmod 600 /home/$USERNAME/.ssh/authorized_keys && \
+    chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh
+
+EXPOSE 22
+EXPOSE 3306
+EXPOSE 80
+EXPOSE 8001
+
+COPY ./docker/entrypoint.sh /docker/entrypoint.sh
+RUN chmod +x /docker/entrypoint.sh
+
+ENTRYPOINT ["/docker/entrypoint.sh"]
+
+# Start the sshd service and the application
+CMD ["/usr/sbin/sshd", "-D"]

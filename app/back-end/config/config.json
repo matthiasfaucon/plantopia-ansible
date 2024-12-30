@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "pmW&ysnu",
+    "database": "plantopia",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "deployer",
+    "password": "deployer",
+    "database": "plantopia",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "deployer",
+    "password": "deployer",
+    "database": "plantopia",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

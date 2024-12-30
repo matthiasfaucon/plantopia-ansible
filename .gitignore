@@ -1,0 +1,7 @@
+**/**/.env
+dist/
+node_modules/ 
+.vscode/
+infrastructure/ansible/roles/app/templates/.env.j2
+infrastructure/ssh_keys
+infrastructure/ansible/vars/config.yml

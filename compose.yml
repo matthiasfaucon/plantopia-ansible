@@ -1,0 +1,28 @@
+services:
+  node_manager:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.controller # je passe par un dockerfile à la place de l'image alpine/ansible pour pouvoir installer rsync
+    working_dir: /app/infrastructure/ansible
+    volumes:
+      - .:/app
+      - ./infrastructure/ssh_keys:/root/.ssh:rw
+    command: ["sh", "-c", "while true; do sleep 30; done;"]
+
+  target:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        - USERNAME=deployer
+        - PASSWORD=deployer
+    environment:
+      - PUBLIC_KEY_FILE=/root/.ssh/authorized_keys
+    volumes:
+      - ./infrastructure/ssh_keys/id_ed25519.pub:/root/.ssh/authorized_keys
+    command: ["sh", "-c", "while true; do sleep 30; done;"]
+    ports:
+      - "80:80"     # Frontend port
+      - "8001:8001" # Backend port
+      - "2222:22"
+      - "3306:3306"

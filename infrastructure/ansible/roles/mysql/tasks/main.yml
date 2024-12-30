@@ -1,0 +1,45 @@
+---
+- name: Installing mysql-server
+  ansible.builtin.apt:
+    update_cache: true
+    name: mysql-server
+
+- name: Installing python3-mysqldb
+  ansible.builtin.apt:
+    update_cache: true
+    name: python3-mysqldb
+  
+- name: Installing mysql-client
+  ansible.builtin.apt:
+    update_cache: true
+    name: mysql-client
+
+- name: Starting mysql
+  ansible.builtin.service:
+    name: mysql
+    state: started
+
+- name: Creating database user
+  mysql_user:
+    name: "{{ DB_USER }}"
+    password: "{{ DB_PASSWORD }}"
+    priv: "{{ DB_NAME }}.*:ALL"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    login_user: "{{ MYSQL_ROOT_USER }}"
+    login_password: "{{ MYSQL_ROOT_PASSWORD }}"
+    
+  become: yes
+
+- name: creating database
+  mysql_db:
+    name: "{{ DB_NAME }}"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    login_user: "{{ MYSQL_ROOT_USER }}"
+    login_password: "{{ MYSQL_ROOT_PASSWORD }}"
+
+- name: Restarting mysql
+  ansible.builtin.service:
+    name: mysql
+    state: restarted

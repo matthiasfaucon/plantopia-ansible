@@ -1,0 +1,10 @@
+FROM alpine:3
+
+RUN apk add --update --no-cache ansible bash openssh sshpass rsync
+
+COPY ./docker/entrypoint.sh /docker/entrypoint.sh
+RUN chmod +x /docker/entrypoint.sh
+
+ENTRYPOINT []
+
+CMD ["ansible-playbook", "--version"]
