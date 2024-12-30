@@ -2,11 +2,10 @@ FROM ubuntu:latest
 
 ARG USERNAME
 ARG PASSWORD
-ARG MYSQL_ROOT_PASSWORD
 
 # Install the necessary packages
 RUN apt-get update -y && apt-get install -y \
-    openssh-server sudo python3 nodejs npm
+    openssh-server sudo python3
 
 # Create the necessary directories for sshd
 RUN mkdir /var/run/sshd
