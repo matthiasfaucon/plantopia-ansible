@@ -2,10 +2,38 @@
 - name: "Install nginx"
   ansible.builtin.apt:
     name: nginx
+    state: present
     update_cache: true
+
+- name: "Create nginx web root directory"
+  ansible.builtin.file:
+    path: "/var/www/html"
+    state: directory
+    mode: "0755"
+    owner: www-data
+    group: www-data
+
 - name: "Install nginx vhost"
   ansible.builtin.template:
     src: ./templates/default.conf.j2
     dest: /etc/nginx/sites-available/default
-    mode: "0600"
+    mode: "0644"
   notify: Reload-nginx
+
+- name: "Enable nginx vhost"
+  ansible.builtin.file:
+    src: /etc/nginx/sites-available/default
+    dest: /etc/nginx/sites-enabled/default
+    state: link
+  notify: Reload-nginx
+
+- name: "Remove default nginx index page"
+  ansible.builtin.file:
+    path: /var/www/html/index.nginx-debian.html
+    state: absent
+
+- name: "Ensure nginx is running and enabled"
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true
