@@ -1,8 +1,10 @@
-Pour informations j'ai fait mes tests dans un dossier, quand j'ai reclone le projet pour tester cette documentation impossible de relancer le playbook... J'ai un problème avec la connexion SSH et je ne pense pas être le seul, je sais que certaines personnes n'ont même pas pu tester leur rendu.
+# Informations globales
 
-De plus, je suis quasiment sûr que l'ouverture des ports dans projets n'est pas bonne (je suppose qu'il faut le faire dans le conteneur target à l'aide du contenur node_manager mais je ne savais pas comment faire)
+Pour information, j'ai effectué mes tests dans un dossier et tout fonctionnait hormis MySQL qui ne se lançait pas (cf. message Discord). Cependant, lorsque j'ai re-cloné le projet pour tester cette documentation, il m'a été impossible de relancer le playbook. J'ai rencontré un problème avec la connexion SSH et je ne pense pas être le seul. À vrai dire, j'ai eu pas mal de soucis avec Docker. J'ai essayé de citer les plus importants dans la documentation ci-dessous et je sais que beaucoup de personnes n'ont même pas pu tester leur rendu parce qu'elles n'arrivaient pas à faire tourner Docker.
 
-Et pour finir impossible de start mysql sur le conteneur target à partir du pipeline.
+De plus, je suis quasiment sûr que l'ouverture des ports dans mon projet n'est pas correcte (je suppose qu'il faut le faire dans le conteneur target à l'aide du conteneur node_manager, mais la surcouche Docker m'a un peu perdu).
+
+Enfin, il m'est impossible de démarrer MySQL sur le conteneur target à partir du playbook.
 
 # Instructions de Déploiement
 
