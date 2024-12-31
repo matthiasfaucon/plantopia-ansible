@@ -19,11 +19,11 @@ cd .\app\
 npm run install:all
 ```
 
-## Construction du front-end
+## Build du front-end
 ```bash
-cd ./front-end
+cd .\front-end
 npm run build
-cd ../..
+cd ..\..
 ```
 
 ## Vérification des clés SSH
@@ -33,7 +33,7 @@ ssh-keygen -t ed25519 -f infrastructure/ssh_keys/id_ed25519
 ```
 
 ## Configuration des fichiers d'environnement
-Allez dans `infrastructure/ansible/roles/app/templates/` et renommer `.env.j2.example` en `.env.j2` et remplacer les valeurs avec celles envoyées par mail.
+Allez dans `infrastructure/ansible/roles/app/templates/` et renommer `.env.j2.example` en `.env.j2` et remplacer les valeurs avec celles mises dans le rendu.
 Faites de même pour `config.yml.example` en le renommant en `config.yml` dans `infrastructure/ansible/vars/`.
 
 ## Lancer les dockers
@@ -78,3 +78,5 @@ Ensuite, relancez le playbook Ansible:
 ```bash
 ansible-playbook -i inventory.ini infra-playbook.yml
 ```
+
+Aller voir DOC_AFTER_DEPLOY.md pour la suite.
